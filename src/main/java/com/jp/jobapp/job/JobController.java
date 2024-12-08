@@ -15,19 +15,19 @@ public class JobController {
         this.jobService = jobService;
     }
 
-//    @GetMapping("/jobs")
-//    @RequestMapping(value = "/jobs", method = RequestMethod.GET)
-    @GetMapping
-    public ResponseEntity<List<Job>> getAllJob() {
-        return  ResponseEntity.ok(jobService.findAll());
-    }
-
 //    @PostMapping("/jobs")
 //    @RequestMapping(value = "/jobs", method = RequestMethod.POST)
     @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
         return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
+    }
+
+//    @GetMapping("/jobs")
+//    @RequestMapping(value = "/jobs", method = RequestMethod.GET)
+    @GetMapping
+    public ResponseEntity<List<Job>> getAllJob() {
+        return  ResponseEntity.ok(jobService.findAll());
     }
 
 //    @GetMapping("/jobs/{id}")

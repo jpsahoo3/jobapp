@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class JobServiceImpl implements JobService {
 //    private List<Job> jobs = new ArrayList<>();
-    JobRepository jobRepository;
+    private JobRepository jobRepository;
 //    private long nextId = 1L;
 
     public JobServiceImpl(JobRepository jobRepository) {
@@ -21,16 +21,16 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<Job> findAll() {
-//        return jobs;
-        return jobRepository.findAll();
-    }
-
-    @Override
     public void createJob(Job job) {
 //        job.setId(nextId++);
 //        jobs.add(job);
         jobRepository.save(job);
+    }
+
+    @Override
+    public List<Job> findAll() {
+//        return jobs;
+        return jobRepository.findAll();
     }
 
     @Override
@@ -42,30 +42,6 @@ public class JobServiceImpl implements JobService {
 //        }
 //        return null;
         return  jobRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public boolean deleteJobById(Long id) {
-//        Iterator<Job> iterator = jobs.iterator();
-//        while (iterator.hasNext()) {
-//            Job job = iterator.next();
-//            if (job.getId().equals(id)) {
-//                iterator.remove();
-//                return true;
-//            }
-//        }
-//        return false;
-        try {
-            if (jobRepository.existsById(id)) { // Check if the job exists
-                jobRepository.deleteById(id);
-                return true; // Return true only if deletion was successful
-            } else {
-                return false; // Return false if the job does not exist
-            }
-        } catch (Exception e) {
-            return false; // Handle any exceptions that may occur
-        }
-
     }
 
     @Override
@@ -94,5 +70,29 @@ public class JobServiceImpl implements JobService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean deleteJobById(Long id) {
+//        Iterator<Job> iterator = jobs.iterator();
+//        while (iterator.hasNext()) {
+//            Job job = iterator.next();
+//            if (job.getId().equals(id)) {
+//                iterator.remove();
+//                return true;
+//            }
+//        }
+//        return false;
+        try {
+            if (jobRepository.existsById(id)) { // Check if the job exists
+                jobRepository.deleteById(id);
+                return true; // Return true only if deletion was successful
+            } else {
+                return false; // Return false if the job does not exist
+            }
+        } catch (Exception e) {
+            return false; // Handle any exceptions that may occur
+        }
+
     }
 }
