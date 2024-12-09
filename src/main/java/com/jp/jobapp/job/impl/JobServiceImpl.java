@@ -1,4 +1,4 @@
-package com.jp.jobapp.impl;
+package com.jp.jobapp.job.impl;
 
 import com.jp.jobapp.job.JobRepository;
 import com.jp.jobapp.job.JobService;
